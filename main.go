@@ -53,6 +53,18 @@ func main() {
 			panic(err)
 		}
 		printQueryMap(rows, cols)
+
+		rows, cols, err = qm.QueryRows(db, "select * from qm.ints")
+		if err != nil {
+			panic(err)
+		}
+		printQueryMap(rows, cols)
+
+		rows, cols, err = qm.QueryRows(db, "select * from qm.dates")
+		if err != nil {
+			panic(err)
+		}
+		printQueryMap(rows, cols)
 	}
 }
 
