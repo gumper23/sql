@@ -81,6 +81,40 @@ values
 
 call populate_ints(100);
 
+create table if not exists dates
+(
+    d           date
+    , dt        datetime
+    , ts        timestamp
+    , tm        time
+    , yr        year
+);
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS qm.populate_dates $$
+CREATE PROCEDURE qm.populate_dates(in_numrows int)
+BEGIN
+	DECLARE i int;
+	DECLARE dt datetime;
+	SET i := 0;
+
+	WHILE (i < in_numrows) DO
+		set dt := from_unixtime(get_random_number(0, 2147483647));
+		insert into dates(d, dt, ts, tm, yr)
+		values (
+			date(dt)				-- d
+			, dt  					-- dt
+			, dt					-- ts
+			, time(dt)  			-- tm
+			, year(dt)  			-- yr
+		);
+		SET i := i + 1;		
+	END WHILE;
+END $$
+DELIMITER ;
+
+call populate_dates(100);
+
 
 
 

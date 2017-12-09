@@ -33,6 +33,12 @@ func main() {
 			panic(err)
 		}
 		printQueryMap(rows, cols)
+
+		rows, cols, err = qm.QueryRows(db, "select * from ints")
+		if err != nil {
+			panic(err)
+		}
+		printQueryMap(rows, cols)
 	}
 
 	dsn, ok = os.LookupEnv("MYSQL_DSN")
