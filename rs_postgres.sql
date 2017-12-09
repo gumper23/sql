@@ -1,4 +1,5 @@
-create table if not exists ints
+drop table if exists ints;
+create table ints
 (
         si smallint
         , i int
@@ -26,5 +27,5 @@ begin
 end;
 $$ language plpgsql;
 
-select populate_ints(100);
+select populate_ints(10);
 

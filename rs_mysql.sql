@@ -1,7 +1,8 @@
 create database if not exists qm;
 use qm;
 
-create table if not exists qm.ints
+drop table if exists qm.ints;
+create table qm.ints
 (
     ti          tinyint                 not null    default '0'
     , tiu       tinyint unsigned        not null    default '0'
@@ -79,9 +80,10 @@ values
     , 18446744073709551615
 );
 
-call populate_ints(100);
+call populate_ints(10);
 
-create table if not exists dates
+drop table if exists qm.dates;
+create table qm.dates
 (
     d           date
     , dt        datetime
@@ -113,7 +115,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-call populate_dates(100);
+call populate_dates(10);
 
 
 

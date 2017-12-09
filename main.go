@@ -6,13 +6,12 @@ import (
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/gumper23/sql/rs"
 	_ "github.com/lib/pq"
-
-	"github.com/gumper23/sql/qm"
 )
 
 func main() {
-	fmt.Printf("Howdy\n")
+	var rs rs.Resultset
 
 	dsn, ok := os.LookupEnv("POSTGRES_DSN")
 	if ok {
@@ -27,18 +26,17 @@ func main() {
 			panic(err)
 		}
 
-		var cols []string
-		rows, cols, err := qm.QueryRows(db, "select * from pg_stat_activity")
+		err = rs.QueryRows(db, "select * from pg_stat_activity")
 		if err != nil {
 			panic(err)
 		}
-		printQueryMap(rows, cols)
+		printQueryMap(rs.Rows, rs.Cols)
 
-		rows, cols, err = qm.QueryRows(db, "select * from ints")
+		err = rs.QueryRows(db, "select * from ints")
 		if err != nil {
 			panic(err)
 		}
-		printQueryMap(rows, cols)
+		printQueryMap(rs.Rows, rs.Cols)
 	}
 
 	dsn, ok = os.LookupEnv("MYSQL_DSN")
@@ -54,28 +52,28 @@ func main() {
 			panic(err)
 		}
 
-		rows, cols, err := qm.QueryRows(db, "select * from information_schema.processlist")
+		err = rs.QueryRows(db, "select * from information_schema.processlist")
 		if err != nil {
 			panic(err)
 		}
-		printQueryMap(rows, cols)
+		printQueryMap(rs.Rows, rs.Cols)
 
-		rows, cols, err = qm.QueryRows(db, "select * from qm.ints")
+		err = rs.QueryRows(db, "select * from qm.ints")
 		if err != nil {
 			panic(err)
 		}
-		printQueryMap(rows, cols)
+		printQueryMap(rs.Rows, rs.Cols)
 
-		rows, cols, err = qm.QueryRows(db, "select * from qm.dates")
+		err = rs.QueryRows(db, "select * from qm.dates")
 		if err != nil {
 			panic(err)
 		}
-		printQueryMap(rows, cols)
+		printQueryMap(rs.Rows, rs.Cols)
 	}
 }
 
-func printQueryMap(qm []map[string]string, cols []string) {
-	for _, row := range qm {
+func printQueryMap(rs []map[string]string, cols []string) {
+	for _, row := range rs {
 		for _, col := range cols {
 			fmt.Printf("%-20s\t%s\n", col+":", row[col])
 		}
