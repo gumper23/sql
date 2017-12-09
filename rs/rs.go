@@ -87,3 +87,21 @@ func (rs *Resultset) QueryRow(db *sql.DB, query string) (map[string]string, []st
 
 	return rs.Rows[0], rs.Cols, nil
 }
+
+// Print prints the resultset.
+func (rs *Resultset) Print() {
+	maxColLen := 0
+	for _, col := range rs.Cols {
+		if len(col) > maxColLen {
+			maxColLen = len(col)
+		}
+	}
+
+	format := fmt.Sprintf("%%-%ds \t%%s\n", maxColLen)
+	for _, row := range rs.Rows {
+		for _, col := range rs.Cols {
+			fmt.Printf(format, col+":", row[col])
+		}
+		fmt.Println()
+	}
+}
