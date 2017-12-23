@@ -29,13 +29,14 @@ func main() {
 			panic(err)
 		}
 
-		err = rs.QueryRows(db, "select * from table")
+		err = rs.QueryRows(db, "select * from information_schema.tables")
 		if err != nil {
 			panic(err)
 		}
 		rs.Hprint()
 	}
 }
+
  ```
 
 # Testing (optional)
