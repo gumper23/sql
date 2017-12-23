@@ -37,7 +37,7 @@ func main() {
 
 	dsn, ok = os.LookupEnv("MYSQL_DSN")
 	if ok {
-  	db, err := sql.Open("mysql", dsn)
+		db, err := sql.Open("mysql", dsn)
 		if err != nil {
 			panic(err)
 		}
@@ -52,8 +52,8 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-    rs.Hprint()
-  }
+		rs.Hprint()
+	}
 } 
 ```
 
