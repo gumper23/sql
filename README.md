@@ -1,5 +1,5 @@
 # sql.rs
-Golang DB Interface For Queries - Returns a slice of map[string][string]
+Golang DB helper that allows exploration of arbitrary queries. Results are converted to strings.
 
 # Testing (optional)
 ```bash
