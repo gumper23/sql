@@ -1,24 +1,6 @@
 # sql.rs
 Golang DB helper that allows exploration of arbitrary queries. Results are converted to strings.
 
-# Testing (optional)
-```bash
-$ export MYSQL_DSN="<user>:<password>@tcp(<host>:<port>)/<dbname>
-```
-
-AND/OR:
-
-```bash
-$ export POSTGRES_DSN="user=<user> password=<password host=<host> port=<port> dbname=<dbname> sslmode=disable"
-```
-
-THEN:
-```bash
-$ go run main.go
-```
-
-This will print 10 rows from every table in the instance that <user> has access to.
-
 # Example:
 
 ```go
@@ -56,3 +38,20 @@ func main() {
 } 
 ```
 
+# Testing (optional)
+```bash
+$ export MYSQL_DSN="<user>:<password>@tcp(<host>:<port>)/<dbname>
+```
+
+AND/OR:
+
+```bash
+$ export POSTGRES_DSN="user=<user> password=<password host=<host> port=<port> dbname=<dbname> sslmode=disable"
+```
+
+THEN:
+```bash
+$ go run main.go
+```
+
+Tested with Postgres and MySQL DBMSes. This will print 10 rows from every table in the instance that <user> has access to.
