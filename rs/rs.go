@@ -64,11 +64,7 @@ func (rs *Resultset) QueryRows(db *sql.DB, query string) error {
 		rs.Rows = append(rs.Rows, row)
 	}
 
-	if err = dbrows.Err(); err != nil {
-		return err
-	}
-
-	return nil
+	return dbrows.Err()
 }
 
 // QueryRow returns the first row from QueryRows().

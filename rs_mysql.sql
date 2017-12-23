@@ -1,8 +1,8 @@
-create database if not exists qm;
-use qm;
+create database if not exists rs;
+use rs;
 
-drop table if exists qm.ints;
-create table qm.ints
+drop table if exists rs.ints;
+create table rs.ints
 (
     ti          tinyint                 not null    default '0'
     , tiu       tinyint unsigned        not null    default '0'
@@ -18,15 +18,15 @@ create table qm.ints
 
 ## MySQL function to generate random numbers
 DELIMITER $$
-DROP FUNCTION IF EXISTS qm.get_random_number $$
-CREATE FUNCTION qm.get_random_number(in_min bigint, in_max bigint) RETURNS BIGINT DETERMINISTIC
+DROP FUNCTION IF EXISTS rs.get_random_number $$
+CREATE FUNCTION rs.get_random_number(in_min bigint, in_max bigint) RETURNS BIGINT DETERMINISTIC
     RETURN FLOOR(RAND() * (in_max - in_min + 1)) + in_min
 $$
 DELIMITER ;
 
 DELIMITER $$
-DROP PROCEDURE IF EXISTS qm.populate_ints $$
-CREATE PROCEDURE qm.populate_ints(in_numrows int)
+DROP PROCEDURE IF EXISTS rs.populate_ints $$
+CREATE PROCEDURE rs.populate_ints(in_numrows int)
 BEGIN
     DECLARE i int;
     SET i := 0;
@@ -82,8 +82,8 @@ values
 
 call populate_ints(10);
 
-drop table if exists qm.dates;
-create table qm.dates
+drop table if exists rs.dates;
+create table rs.dates
 (
     d           date
     , dt        datetime
@@ -93,8 +93,8 @@ create table qm.dates
 );
 
 DELIMITER $$
-DROP PROCEDURE IF EXISTS qm.populate_dates $$
-CREATE PROCEDURE qm.populate_dates(in_numrows int)
+DROP PROCEDURE IF EXISTS rs.populate_dates $$
+CREATE PROCEDURE rs.populate_dates(in_numrows int)
 BEGIN
     DECLARE i int;
     DECLARE dt datetime;

@@ -57,13 +57,13 @@ func main() {
 		}
 		rs.Print()
 
-		err = rs.QueryRows(db, "select * from qm.ints")
+		err = rs.QueryRows(db, "select * from rs.ints")
 		if err != nil {
 			panic(err)
 		}
 		rs.Print()
 
-		err = rs.QueryRows(db, "select * from qm.dates")
+		err = rs.QueryRows(db, "select * from rs.dates")
 		if err != nil {
 			panic(err)
 		}
