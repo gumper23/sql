@@ -34,7 +34,6 @@ import (
 )
 
 func main() {
-
 	dsn, ok = os.LookupEnv("MYSQL_DSN")
 	if ok {
 		db, err := sql.Open("mysql", dsn)
