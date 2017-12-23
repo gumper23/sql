@@ -89,8 +89,8 @@ func (rs *Resultset) QueryRow(db *sql.DB, query string) (map[string]string, []st
 	return rs.Rows[0], rs.Cols, nil
 }
 
-// VPrint vertically prints the resultset.
-func (rs *Resultset) VPrint() {
+// Vprint vertically prints the resultset.
+func (rs *Resultset) Vprint() {
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 0, 4, 1, ' ', 0)
 
@@ -105,8 +105,8 @@ func (rs *Resultset) VPrint() {
 	w.Flush()
 }
 
-// HPrint horizontally prints the resultset.
-func (rs *Resultset) HPrint() {
+// Hprint horizontally prints the resultset.
+func (rs *Resultset) Hprint() {
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 0, 4, 1, ' ', 0)
 
