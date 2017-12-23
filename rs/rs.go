@@ -3,6 +3,9 @@ package rs
 import (
 	"database/sql"
 	"fmt"
+	"os"
+	"strings"
+	"text/tabwriter"
 	"time"
 )
 
@@ -86,20 +89,40 @@ func (rs *Resultset) QueryRow(db *sql.DB, query string) (map[string]string, []st
 	return rs.Rows[0], rs.Cols, nil
 }
 
-// Print prints the resultset.
-func (rs *Resultset) Print() {
-	maxColLen := 0
-	for _, col := range rs.Cols {
-		if len(col) > maxColLen {
-			maxColLen = len(col)
-		}
-	}
+// VPrint vertically prints the resultset.
+func (rs *Resultset) VPrint() {
+	w := new(tabwriter.Writer)
+	w.Init(os.Stdout, 0, 4, 1, ' ', 0)
 
-	format := fmt.Sprintf("%%-%ds \t%%-s\n", maxColLen)
 	for _, row := range rs.Rows {
 		for _, col := range rs.Cols {
-			fmt.Printf(format, col+":", row[col])
+			out := strings.Replace(row[col], "\t", " ", -1)
+			out = strings.Replace(out, "%", "%%", -1)
+			fmt.Fprintf(w, "%s:\t%s\n", col, out)
 		}
-		fmt.Println()
+		fmt.Fprintln(w, "")
 	}
+	w.Flush()
+}
+
+// HPrint horizontally prints the resultset.
+func (rs *Resultset) HPrint() {
+	w := new(tabwriter.Writer)
+	w.Init(os.Stdout, 0, 4, 1, ' ', 0)
+
+	header := ""
+	for _, col := range rs.Cols {
+		header = header + fmt.Sprintf("%s\t", col)
+	}
+	fmt.Fprintln(w, header)
+
+	for _, row := range rs.Rows {
+		out := ""
+		for _, col := range rs.Cols {
+			val := strings.Replace(row[col], "\t", " ", -1)
+			out = out + fmt.Sprintf("%s\t", val)
+		}
+		fmt.Fprintln(w, out)
+	}
+	w.Flush()
 }

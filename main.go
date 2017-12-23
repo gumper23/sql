@@ -36,7 +36,8 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			rs.Print()
+			rs.HPrint()
+			fmt.Println("")
 		}
 	}
 
@@ -63,7 +64,8 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			rs.Print()
+			rs.VPrint()
+			fmt.Println("")
 		}
 	}
 }
