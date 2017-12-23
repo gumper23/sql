@@ -57,6 +57,8 @@ func (rs *Resultset) QueryRows(db *sql.DB, query string) error {
 				row[rs.Cols[i]] = v.Format("2006-01-02 15:04:05.999")
 			case int64:
 				row[rs.Cols[i]] = fmt.Sprintf("%d", v)
+			case float64:
+				row[rs.Cols[i]] = fmt.Sprintf("%f", v)
 			default:
 				row[rs.Cols[i]] = v.(string)
 			}
@@ -93,7 +95,7 @@ func (rs *Resultset) Print() {
 		}
 	}
 
-	format := fmt.Sprintf("%%-%ds \t%%s\n", maxColLen)
+	format := fmt.Sprintf("%%-%ds \t%%-s\n", maxColLen)
 	for _, row := range rs.Rows {
 		for _, col := range rs.Cols {
 			fmt.Printf(format, col+":", row[col])

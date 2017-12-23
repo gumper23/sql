@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -25,17 +26,18 @@ func main() {
 			panic(err)
 		}
 
-		err = rs.QueryRows(db, "select * from pg_stat_activity")
+		err = rs.QueryRows(db, "select table_schema as table_schema, table_name as table_name from information_schema.tables")
 		if err != nil {
 			panic(err)
 		}
-		rs.Print()
 
-		err = rs.QueryRows(db, "select * from ints")
-		if err != nil {
-			panic(err)
+		for _, row := range rs.Rows {
+			err := rs.QueryRows(db, fmt.Sprintf("select * from %s.%s limit 10", row["table_schema"], row["table_name"]))
+			if err != nil {
+				panic(err)
+			}
+			rs.Print()
 		}
-		rs.Print()
 	}
 
 	dsn, ok = os.LookupEnv("MYSQL_DSN")
@@ -51,22 +53,17 @@ func main() {
 			panic(err)
 		}
 
-		err = rs.QueryRows(db, "select * from information_schema.processlist")
+		err = rs.QueryRows(db, "select table_schema as table_schema, table_name as table_name from information_schema.tables")
 		if err != nil {
 			panic(err)
 		}
-		rs.Print()
 
-		err = rs.QueryRows(db, "select * from rs.ints")
-		if err != nil {
-			panic(err)
+		for _, row := range rs.Rows {
+			err := rs.QueryRows(db, fmt.Sprintf("select * from %s.%s limit 10", row["table_schema"], row["table_name"]))
+			if err != nil {
+				panic(err)
+			}
+			rs.Print()
 		}
-		rs.Print()
-
-		err = rs.QueryRows(db, "select * from rs.dates")
-		if err != nil {
-			panic(err)
-		}
-		rs.Print()
 	}
 }
