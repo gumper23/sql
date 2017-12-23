@@ -8,7 +8,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -16,7 +15,8 @@ import (
 )
 
 func main() {
-	dsn, ok = os.LookupEnv("MYSQL_DSN")
+	var rs rs.Resultset
+	dsn, ok := os.LookupEnv("MYSQL_DSN")
 	if ok {
 		db, err := sql.Open("mysql", dsn)
 		if err != nil {
@@ -35,8 +35,8 @@ func main() {
 		}
 		rs.Hprint()
 	}
-} 
-```
+}
+ ```
 
 # Testing (optional)
 ```bash
