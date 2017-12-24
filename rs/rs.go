@@ -15,8 +15,7 @@ type Resultset struct {
 	Rows []map[string]string
 }
 
-// QueryRows Executes query on db, returns an array of maps of the resultset in label/value format.
-// Column names are in the second return value. Used for queries that need column positions.
+// QueryRows Executes query on db. Populates Cols with column names, and Rows with a slice of rows of map[string]string.
 func (rs *Resultset) QueryRows(db *sql.DB, query string) error {
 	rs.Rows = make([]map[string]string, 0)
 	rs.Cols = make([]string, 0)
