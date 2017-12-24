@@ -47,7 +47,7 @@ $ export MYSQL_DSN="<user>:<password>@tcp(<host>:<port>)/<dbname>
 AND/OR:
 
 ```bash
-$ export POSTGRES_DSN="user=<user> password=<password host=<host> port=<port> dbname=<dbname> sslmode=disable"
+$ export POSTGRES_DSN="user=<user> password=<password> host=<host> port=<port> dbname=<dbname> sslmode=disable"
 ```
 
 THEN:
