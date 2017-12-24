@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-// Resultset contains a slice of the columns from a query, and the rows as an array of label/value pairs.
+// Resultset contains a slice of the columns from a query, and the rows as a slice of label/value pairs.
 type Resultset struct {
 	Cols []string
 	Rows []map[string]string
