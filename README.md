@@ -55,7 +55,7 @@ THEN:
 $ go run main.go
 ```
 
-This will print 10 rows from every table in the instance that <user> has access to.
+This will print 10 rows from every table in the instance that `<user>` has access to.
 	
 Tested with Postgres and MySQL DBMSes. 
 
